@@ -1,5 +1,5 @@
-# Backend II - Pre Entrega 1 - Tomas Gordyn
-Este proyecto corresponde a la **Pre Entrega 1** del curso **Programación Backend II: Diseño y Arquitectura Backend** de **CODERHOUSE**, comisión **70070**. Implementación de Login, Register, autorización y autenticación.
+# Pre Entrega 1 curso Backend II - Tomas Gordyn
+Este proyecto corresponde a la **Pre Entrega 1** del curso **Programación Backend II: Diseño y Arquitectura Backend**, comisión **70070**. Implementación de Login, Register, autorización y autenticación de usuario.
 
 ## Requisitos previos
 Asegúrate de tener instalados los siguientes programas:
@@ -18,10 +18,7 @@ Asegúrate de tener instalados los siguientes programas:
    npm install
 
 4. **Configuración del archivo `.env`:**
-   Crea un archivo `.env` en la raíz del proyecto con el siguiente formato, reemplazando los valores con los apropiados para tu entorno de desarrollo:
-   PORT=8080
-   MONGO_URL=mongodb+srv://<usuario>:<password>@cluster0.mongodb.net/mydatabase
-   JWT_SECRET=coder_jwt
+   Crea un archivo `.env` en la raíz del proyecto con el siguiente formato, reemplazando los valores con los apropiados para tu entorno de desarrollo. Ejemplo de archivo `.env.example` para referencia de variables.
 
 5. **Iniciar la aplicación:**
    npm start
