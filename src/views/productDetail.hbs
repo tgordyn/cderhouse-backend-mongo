@@ -36,14 +36,23 @@
   </footer>
 
   <script>
+    // Esta variable debe ser establecida en el servidor
+    const isLoggedIn = {{isLoggedIn}}; // Se debe pasar desde el servidor como true/false
+
     document.addEventListener('DOMContentLoaded', () => {
       const buttons = document.querySelectorAll('.add-to-cart-btn');
-      console.log('Botones encontrados:', buttons);  // Verifica si encuentra los botones
+      console.log('Botones encontrados:', buttons);
 
       buttons.forEach(button => {
         button.addEventListener('click', async (event) => {
           const productId = event.target.dataset.productId;
-          console.log("Producto agregado:", productId);  // Debes ver el ID del producto
+          console.log("Producto agregado:", productId);
+
+          // Verificar si el usuario está logueado
+          if (!isLoggedIn) {
+            alert('Debe loguearse para agregar producto al carrito');
+            return; // Salir si el usuario no está logueado
+          }
 
           const response = await fetch(`/api/cart/add/${productId}`, {
             method: 'POST',
@@ -55,7 +64,7 @@
           if (response.ok) {
             alert('Producto agregado al carrito');
           } else {
-            alert('Debe loguearse para agregar producto al carrito');
+            alert('Error al agregar el producto al carrito.');
           }
         });
       });

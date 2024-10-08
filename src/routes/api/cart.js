@@ -13,7 +13,7 @@ router.get('/', isAuthenticated, async (req, res) => {
   try {
 
 
-    const userId = req.session.user._id; // Asegúrate de que el usuario esté autenticado
+    const userId = req.user._id; // Asegúrate de que el usuario esté autenticado
 
     // Buscar el carrito del usuario y poblar los productos
     const cart = await Cart.findOne({ userId }).populate('products.product'); // Solo usa 'product' para el populate
@@ -39,9 +39,10 @@ router.get('/', isAuthenticated, async (req, res) => {
 
 
 // Ruta para agregar un producto al carrito
-router.post('/add/:id', async (req, res) => {
+router.post('/add/:id', isAuthenticated, async (req, res) => {
+  console.log('userid', req.user)
   const productId = req.params.id;
-  const userId = req.session.user._id; // Asegúrate de que el usuario esté autenticado
+  const userId = req.user._id; // Asegúrate de que el usuario esté autenticado
 
   try {
     // Encuentra el producto en la base de datos
@@ -76,9 +77,9 @@ router.post('/add/:id', async (req, res) => {
 
 
 // Ruta para eliminar un producto del carrito
-router.post('/remove/:id', async (req, res) => {
+router.post('/remove/:id', isAuthenticated, async (req, res) => {
   const productId = req.params.id; // ID del producto a eliminar
-  const userId = req.session.user._id; // Asegúrate de que el usuario esté autenticado
+  const userId = req.user._id; // Asegúrate de que el usuario esté autenticado
 
   try {
     // Encuentra el carrito del usuario
@@ -123,7 +124,7 @@ router.post('/remove/:id', async (req, res) => {
 
 router.post('/:cid/purchase', isAuthenticated, async (req, res) => {
   const cartId = req.params.cid;
-  const userId = req.session.user._id;
+  const userId = req.user._id;
 
   try {
     // Encuentra el carrito del usuario y sus productos
@@ -158,7 +159,7 @@ router.post('/:cid/purchase', isAuthenticated, async (req, res) => {
       code: ticketCode, // El código generado
       purchase_datetime: new Date(),
       amount: totalAmount,
-      purchaser: req.session.user.email
+      purchaser: req.user.email
     });
 
     await newTicket.save(); // Guardar el ticket en la base de datos
