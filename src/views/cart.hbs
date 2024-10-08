@@ -1,0 +1,65 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Carrito</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOM/J8z6QqZ7Tga7F/xy0c4G/Q5o7Fz3iG3ZxOBWjA0XHQQlK9HcYoC5nWj6g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1>Mi Carrito</h1>
+        <div class="header-icons">
+          <a href="/login"><i class="fas fa-user"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      {{#if cart.length}}
+        <section class="product-list2">
+          {{#each cart}}
+            <div class="product-card2">
+              <img
+                src="{{this.product.image}}"
+                alt="{{this.product.title}}"
+                width="100"
+              />
+              <h2>{{this.product.title}}</h2>
+              <p>Categoría: {{this.product.category}}</p>
+              <p>Precio: ${{this.product.price}}</p>
+              <p>Cantidad: {{this.quantity}}</p>
+              <form action="/api/cart/remove/{{this.product._id}}" method="POST">
+                <button class="btn2" type="submit">Eliminar del carrito</button>
+              </form>
+            </div>
+          {{/each}}
+        </section>
+        <div class="parent-container">
+          <form
+            action="/api/cart/{{cartId}}/purchase"
+            method="POST"
+            class="checkout-form2"
+          >
+            <button type="submit">Finalizar Compra</button>
+          </form>
+        </div>
+
+      {{else}}
+        <p class="vacio">Tu carrito está vacío.</p>
+      {{/if}}
+    </main>
+
+    <footer>
+      <a href="/">Volver a la tienda</a>
+    </footer>
+  </body>
+</html>

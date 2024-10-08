@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VivaVintage - Home</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <h1>VivaVintage</h1>
+        <div class="header-icons">
+          <a href="/login"><i class="fas fa-user"></i></a>
+          <a href="/api/cart"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <section class="product-list">
+        {{#each products}}
+          <div class="product-card">
+            <a href="/products/{{this._id}}">
+              <img
+                src="{{this.image}}"
+                alt="{{this.title}}"
+                class="product-image"
+              />
+              <h2>{{this.title}}</h2>
+              <p>Price: ${{this.price}}</p>
+              <p>Category: {{this.category}}</p>
+              <button
+                class="add-to-cart-btn"
+                data-product-id="{{this._id}}"
+              >Agregar</button>
+            </a>
+          </div>
+        {{/each}}
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => { const buttons =
+      document.querySelectorAll('.add-to-cart-btn'); console.log('Botones
+      encontrados:', buttons); // Verifica si encuentra los botones
+      buttons.forEach(button => { button.addEventListener('click', async (event)
+      => { const productId = event.target.dataset.productId;
+      console.log("Producto agregado:", productId); // Debes ver el ID del
+      producto const response = await fetch(`/api/cart/add/${productId}`, { method:
+      'POST', headers: { 'Content-Type': 'application/json', }, }); if
+      (response.ok) { alert('Producto agregado al carrito'); } else {
+      alert('Error al agregar producto al carrito'); } }); }); });
+    </script>
+  </body>
+</html>

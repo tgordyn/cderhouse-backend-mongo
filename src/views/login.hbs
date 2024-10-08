@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="/styles.css">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <h2>Iniciar Sesión</h2>
+        </div>
+    </header>
+
     <div class="form-container">
-        <h2>Iniciar Sesión</h2>
         <form action="/api/sessions/login" method="POST">
             <label for="email">Email:</label>
             <input type="email" name="email" required>
@@ -21,8 +21,12 @@
             <input type="password" name="password" required>
             <button type="submit">Ingresar</button>
         </form>
-        <a href="/register">Registrarse!</a>
-
     </div>
+
+    {{#unless user}}
+        <a href="/register">Registrarse!</a>
+    {{/unless}}
+
+    <a href="/">Volver a la tienda</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# Pre Entrega 1 curso Backend II - Tomas Gordyn
+# Entrega Final curso Backend II - Tomas Gordyn
 Este proyecto corresponde a la **Pre Entrega 1** del curso **Programación Backend II: Diseño y Arquitectura Backend**, comisión **70070**. Implementación de Login, Register, autorización y autenticación de usuario.
 
 ## Requisitos previos
@@ -22,6 +22,10 @@ Asegúrate de tener instalados los siguientes programas:
 
 5. **Iniciar la aplicación:**
    npm start
+
+6. **Poblar base de datos con productos:**
+   cd src
+   node seedProducts.js
 
 ## Servidor
 El servidor está configurado para ejecutarse en `localhost` en el puerto `8080`. Una vez que la aplicación esté inicializada con el comando `npm start`, se puede visualizar el proyecto en un navegador utilizando el siguiente enlace:

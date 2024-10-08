@@ -1,18 +1,67 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f4f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+
 }
 
-h2 {
-  text-align: center;
+/* Formulario */
+form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  /* width: 100%; */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  margin-top: 5%;
+  /* height: 100vh;  */
+}
+
+.ctn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 2rem auto; /* Centrar el contenedor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ctn p {
+  font-size: 1.2rem;
   color: #333;
+  margin-bottom: 1rem;
 }
 
+.ctn p strong {
+  font-weight: bold;
+}
+
+.ctn p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Estilos del formulario */
 form {
   background-color: #fff;
   padding: 2rem;
@@ -20,6 +69,12 @@ form {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
+
+}
+.icon {
+  width: 24px;  /* Cambia el tamaño del ícono */
+  height: 24px;
+  margin-right: 8px;  /* Espacio alrededor del ícono */
 }
 
 label {
@@ -68,6 +123,239 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Header */
+header {
+  background-color: #f8f8f8;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-container h1 {
+  font-size: 24px;
+  color: #333;
+  margin-right: auto; /* Esto asegura que el título esté alineado a la izquierda */
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre los iconos */
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* Productos */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-card h2 {
+  font-size: 18px;
+  color: #333;
+}
+
+.product-card p {
+  color: #777;
+  font-size: 14px;
+}
+
+.product-image {
+  width: 120px; /* Ajusta el ancho según lo que necesites */
+  height: 120px; /* Ajusta la altura según lo que necesites */
+  object-fit: cover; /* Recorta la imagen para que encaje en el contenedor */
+  margin-bottom: 10px;
+  border-radius: 5px; /* Opcional: para esquinas redondeadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.product-image-detail{
+  width: 140px; /* Ajusta el ancho según lo que necesites */
+  height: 140px; /* Ajusta la altura según lo que necesites */
+  object-fit: cover; /* Recorta la imagen para que encaje en el contenedor */
+  margin-bottom: 10px;
+  border-radius: 5px; /* Opcional: para esquinas redondeadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Centrado del formulario */
 .form-container {
   text-align: center;
+}
+
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem; /* Espacio entre la imagen y la información */
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 2rem auto; /* Centrar el contenedor en la página */
+}
+
+.product-detail-container img {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.product-info p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.product-info h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.add-to-cart-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: rgb(10, 168, 221);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.add-to-cart-btn:hover {
+  background-color: blue;
+}
+
+
+.product-list2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre los productos */
+  justify-content: center; /* Centrar los productos */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+/* Estilo para cada tarjeta de producto */
+.product-card2 {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  width: 200px; /* Ancho fijo para cada tarjeta */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para las imágenes del producto */
+.product-card2 img {
+  max-width: 100%; /* Asegura que la imagen no desborde el contenedor */
+  height: auto; /* Mantiene la relación de aspecto */
+}
+.btn2{
+  font-size: 14px;
+}
+.parent-container {
+  display: flex; /* Usar Flexbox */
+  justify-content: center; /* Centrar horizontalmente */
+}
+/* Estilo para el formulario de checkout */
+.checkout-form2 {
+  display: flex;
+  justify-content: center; /* Centrar el botón de finalizar compra */
+  margin-top: 5%; /* Espacio superior para separación */
+  text-align: center;
+}
+
+/* Estilo para el pie de página */
+footer {
+  text-align: center; /* Centrar el texto en el pie de página */
+  margin-top: 20px; /* Espacio superior para separación */
+  padding: 10px;
+}
+
+.ticket-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}
+.ticket-container h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.ticket-container p {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+.ticket-container .total-amount {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.back-link:hover {
+  background-color: #0056b3;
+}
+
+.vacio{
+  text-align: center;
+  font-size: 24px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }

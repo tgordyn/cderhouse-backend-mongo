@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, "coder_jwt", { expiresIn: "1h" });
-
+    req.session.user = user;
     // Guardar el token en una cookie
     res.cookie("token", token, { httpOnly: true });
     res.redirect("/api/sessions/current");
