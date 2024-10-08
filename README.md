@@ -18,14 +18,15 @@ Asegúrate de tener instalados los siguientes programas:
    npm install
 
 4. **Configuración del archivo `.env`:**
-   Crea un archivo `.env` en la raíz del proyecto con el siguiente formato, reemplazando los valores con los apropiados para tu entorno de desarrollo. Ejemplo de archivo `.env.example` para referencia de variables.
+   - Crea un archivo `.env` en la raíz del proyecto con el siguiente formato, reemplazando los valores con los apropiados para tu entorno de desarrollo.
+  Ejemplo de archivo `.env.example` para referencia de variables.
 
-5. **Iniciar la aplicación:**
-   npm start
+1. **Iniciar la aplicación:**
+   - npm start
 
-6. **Poblar base de datos con productos:**
-   cd src
-   node seedProducts.js
+2. **Poblar base de datos con productos:**
+   - cd src
+   - node seedProducts.js
 
 ## Servidor
 El servidor está configurado para ejecutarse en `localhost` en el puerto `8080`. Una vez que la aplicación esté inicializada con el comando `npm start`, se puede visualizar el proyecto en un navegador utilizando el siguiente enlace:
