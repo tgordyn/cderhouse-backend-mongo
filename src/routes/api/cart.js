@@ -17,17 +17,17 @@ router.get('/', isAuthenticated, async (req, res) => {
 
     // Buscar el carrito del usuario y poblar los productos
     const cart = await Cart.findOne({ userId }).populate('products.product'); // Solo usa 'product' para el populate
-
+    console.log('cart', cart)
     if (!cart || cart.products.length === 0) {
       return res.render('cart', { message: 'Tu carrito está vacío.' });
     }
 
     // Convierte los productos en objetos simples
     const cartArray = cart.products.map(item => ({
-      product: item.product.toObject(), // Convierte el producto a un objeto simple
+      product: item.product,
       quantity: item.quantity // Mantén la cantidad
     }));
-
+    console.log('arreglo', cartArray)
     // Renderiza la vista del carrito con el array de productos
     res.render('cart', { cart: cartArray, cartId: cart._id  });
   } catch (err) {

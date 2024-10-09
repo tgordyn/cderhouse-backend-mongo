@@ -40,12 +40,10 @@ router.post("/login", async (req, res) => {
     }
 
     // Genera el token JWT usando el id del DTO
-
     const token = jwt.sign({ id: userDTO._id }, SECRET_PASSPORT);
     res.cookie("jwt", token, { httpOnly: true });
-    //res.redirect("/api/sessions/current");
-    res.render("login");
-    const decoded = jwt.verify(token, SECRET_PASSPORT);
+    return res.redirect('/api/sessions/current')
+
   } catch (err) {
     res.status(500).json({ error: "Error al iniciar sesión" });
   }
