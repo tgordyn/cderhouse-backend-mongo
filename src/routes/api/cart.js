@@ -142,7 +142,12 @@ router.post('/:cid/purchase', isAuthenticated, async (req, res) => {
         item.product.stock -= item.quantity;
         await item.product.save();
         totalAmount += item.product.price * item.quantity;
-        productsToPurchase.push(item); // Añadir el producto al proceso de compra
+
+        // Añadir el producto al proceso de compra
+        productsToPurchase.push({
+          product: item.product._id, // Asegúrate de añadir el ID del producto
+          quantity: item.quantity
+        });
       }
     }
 
@@ -153,18 +158,19 @@ router.post('/:cid/purchase', isAuthenticated, async (req, res) => {
     // Generar un código único para el ticket
     const ticketCode = uuidv4();
 
-    // Crear el ticket
+    // Crear el ticket con los productos
     const newTicket = new Ticket({
       code: ticketCode, // El código generado
       purchase_datetime: new Date(),
       amount: totalAmount,
-      purchaser: req.user.email
+      purchaser: req.user.email,
+      products: productsToPurchase // Aquí se añaden los productos al ticket
     });
 
     await newTicket.save(); // Guardar el ticket en la base de datos
 
     // Limpiar el carrito o eliminar los productos comprados
-    cart.products = cart.products.filter(item => !productsToPurchase.includes(item));
+    cart.products = cart.products.filter(item => !productsToPurchase.find(p => p.product.equals(item.product._id)));
     await cart.save();
 
     // Redirigir a una página de confirmación de compra o mostrar el detalle del ticket
@@ -174,6 +180,7 @@ router.post('/:cid/purchase', isAuthenticated, async (req, res) => {
     res.status(500).send('Error al finalizar la compra');
   }
 });
+
 
 
 export default router;
