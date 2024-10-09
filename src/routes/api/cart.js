@@ -11,13 +11,11 @@ const router = express.Router();
 
 router.get('/', isAuthenticated, async (req, res) => {
   try {
-
-
     const userId = req.user._id; // Asegúrate de que el usuario esté autenticado
 
-    // Buscar el carrito del usuario y poblar los productos
-    const cart = await Cart.findOne({ userId }).populate('products.product'); // Solo usa 'product' para el populate
-    console.log('cart', cart)
+    // Buscar el carrito del usuario y poblar los productos, usando lean() para evitar problemas con Handlebars
+    const cart = await Cart.findOne({ userId }).populate('products.product').lean();
+
     if (!cart || cart.products.length === 0) {
       return res.render('cart', { message: 'Tu carrito está vacío.' });
     }
@@ -27,14 +25,15 @@ router.get('/', isAuthenticated, async (req, res) => {
       product: item.product,
       quantity: item.quantity // Mantén la cantidad
     }));
-    console.log('arreglo', cartArray)
+
     // Renderiza la vista del carrito con el array de productos
-    res.render('cart', { cart: cartArray, cartId: cart._id  });
+    res.render('cart', { cart: cartArray, cartId: cart._id });
   } catch (err) {
     console.error('Error obteniendo el carrito:', err);
     res.status(500).send('Error al obtener el carrito!');
   }
 });
+
 
 
 

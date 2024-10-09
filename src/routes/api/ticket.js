@@ -28,7 +28,6 @@ router.get('/:ticketId', isAuthenticated, async (req, res) => {
 
 router.post('/:id/mail', isAuthenticated, async (req, res) => {
   const ticketId = req.params.id;
-  console.log('hola!!')
   console.log('Ticket ID:', ticketId);
   try {
     const ticket = await Ticket.findById(ticketId).populate('products.product').lean();
@@ -47,7 +46,7 @@ router.post('/:id/mail', isAuthenticated, async (req, res) => {
       Productos: ${ticket.products.map(item => `${item.product.title} - Cantidad: ${item.quantity}`).join('\n')}
       Total: $${ticket.amount}`,
     };
-
+    console.log(ticket)
     await mailTransporter.sendMail(mailOptions);
     return res.status(200).send('Correo enviado exitosamente');
 
