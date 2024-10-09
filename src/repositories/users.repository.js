@@ -7,10 +7,10 @@ import UserDTO from '../dao/DTOs/user.dto.js';
 class UserRepository {
   async createUser(userData) {
     const { password, ...rest } = userData;
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    const newUser = new User({ ...rest, password: hashedPassword });
+    console.log("Contraseña antes de encriptar:", password);
+    const newUser = new User({ ...rest, password }); // Aquí ya no se hace el hash
     return await newUser.save();
-  }
+}
 
   async findByEmail(email) {
     return await User.findOne({ email }).lean();
@@ -22,9 +22,14 @@ class UserRepository {
 
   async validateUser(email, password) {
     const user = await this.findByEmail(email);
+
     if (!user) return null;
 
-    const isValid = bcrypt.compareSync(password, user.password);
+
+    console.log("Contraseña ingresada:", password); // Muestra la contraseña ingresada
+    console.log("Contraseña almacenada:", user.password); // Muestra la contraseña almacenada
+    const isValid = bcrypt.compareSync(password.trim(), user.password);
+    // Verifica si la comparación es verdadera
     return isValid ? new UserDTO(user) : null; // Retorna un DTO si la contraseña es válida
   }
 
@@ -39,7 +44,7 @@ class UserRepository {
   }
 
   generateToken(userId) {
-    return jwt.sign({ id: userId }, SECRET_PASSPORT, { expiresIn: '1h' });;
+    return jwt.sign({ id: userId }, SECRET_PASSPORT );;
   }
 }
 

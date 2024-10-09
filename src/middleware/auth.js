@@ -17,3 +17,13 @@ export const isNotAuthenticated = (req, res, next) => {
     return res.redirect('/api/sessions/current'); // Redirige si hay token
   }
 };
+
+export const ensureAuthenticated = (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user) => {
+    if (user) {
+      return res.redirect('/api/sessions/current');
+    }
+
+    next();
+  })(req, res, next);
+}

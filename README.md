@@ -1,5 +1,5 @@
 # Entrega Final curso Backend II - Tomas Gordyn
-Este proyecto corresponde a la **Entrega final** del curso **Programación Backend II: Diseño y Arquitectura Backend**, comisión **70070**. Implementación de Login, Register, autorización, autenticación de usuario, arquitectura DAO, DTO, Repository y Ticket.
+Este proyecto corresponde a la **Entrega final** del curso **Programación Backend II: Diseño y Arquitectura Backend**, comisión **70070**. Implementación de Login, Register, autorización, autenticación de usuario, arquitectura DAO, DTO, Repository, Ticket y nodemailer.
 
 ## Requisitos previos
 Asegúrate de tener instalados los siguientes programas:

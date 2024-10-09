@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isNotAuthenticated } from "../middleware/auth.js";
+import { ensureAuthenticated } from "../middleware/auth.js";
 import Product from "../models/products.js";
 import mongoose from "mongoose";
 
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/login", isNotAuthenticated, (req, res) => {
+router.get("/login", ensureAuthenticated, (req, res) => {
   res.render("login");
 });
 

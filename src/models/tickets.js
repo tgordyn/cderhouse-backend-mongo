@@ -18,6 +18,10 @@ const ticketSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  products: [{
+    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }, // Asegúrate de que esta referencia sea correcta
+    quantity: Number
+  }],
 });
 
 ticketSchema.pre('save', async function(next) {

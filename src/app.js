@@ -8,11 +8,13 @@ import sessionsRouter from './routes/api/sessions.js';
 import viewsRouter from './routes/views.js';
 import cartRouter from './routes/api/cart.js';
 import ticketRouter from './routes/api/ticket.js';
+import mailRouter from './routes/api/mail.js';
 import methodOverride from 'method-override';
 import passport from "passport";
 import initializePassport from "./config/passport.config.js";
 import cookieParser from 'cookie-parser';
 import config from './config/config.js';
+import nodemailer from 'nodemailer';
 
 const app = express();
 
@@ -54,9 +56,10 @@ app.use(methodOverride('_method'));
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/ticket', ticketRouter);
+app.get('/api/mail', mailRouter);
 app.use('/', viewsRouter);
 app.use((req, res, next) => {
-  res.status(404).render('404', { message: 'Página no encontrada.' }); // O redirige a otra ruta
+  res.status(404).json({ error: 'Página no encontrada.' }); // Cambiado para devolver JSON
 });
 
 
