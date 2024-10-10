@@ -13,6 +13,9 @@ import passport from "passport";
 import initializePassport from "./config/passport.config.js";
 import cookieParser from 'cookie-parser';
 import config from './config/config.js';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 
 const app = express();
