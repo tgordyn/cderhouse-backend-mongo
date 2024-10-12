@@ -19,7 +19,7 @@ const ticketSchema = new mongoose.Schema({
     required: true,
   },
   products: [{
-    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }, // Asegúrate de que esta referencia sea correcta
+    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
     quantity: Number
   }],
 });

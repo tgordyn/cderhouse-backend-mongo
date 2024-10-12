@@ -5,15 +5,15 @@ export const passportCall = (strategy) => {
     console.log('Verificando autenticación con Passport...');
     passport.authenticate(strategy, (err, user, info) => {
       if (err) {
-        return next(err); // En caso de error, pasa al siguiente middleware
+        return next(err);
       }
       if (!user) {
         console.log('No se encontró el usuario:', info);
-        return res.status(401).send({ error: "No autorizado" }); // Usuario no autenticado
+        return res.status(401).send({ error: "No autorizado" });
       }
-      req.user = user; // Asigna el usuario autenticado a req.user
+      req.user = user;
       console.log('Usuario autenticado:', user);
-      next(); // Pasa al siguiente middleware
+      next();
     })(req, res, next);
   };
 };

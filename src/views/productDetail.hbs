@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalles del Producto</title>
-  <link rel="stylesheet" href="/styles.css"> <!-- Aquí puedes enlazar tu CSS -->
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <header>
@@ -36,8 +36,8 @@
   </footer>
 
   <script>
-    // Esta variable debe ser establecida en el servidor
-    const isLoggedIn = {{isLoggedIn}}; // Se debe pasar desde el servidor como true/false
+
+    const isLoggedIn = {{isLoggedIn}};
 
     document.addEventListener('DOMContentLoaded', () => {
       const buttons = document.querySelectorAll('.add-to-cart-btn');
@@ -48,10 +48,10 @@
           const productId = event.target.dataset.productId;
           console.log("Producto agregado:", productId);
 
-          // Verificar si el usuario está logueado
+
           if (!isLoggedIn) {
             alert('Debe loguearse para agregar producto al carrito');
-            return; // Salir si el usuario no está logueado
+            return;
           }
 
           const response = await fetch(`/api/cart/add/${productId}`, {

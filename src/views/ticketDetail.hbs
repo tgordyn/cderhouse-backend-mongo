@@ -15,7 +15,7 @@
     <p><strong>Fecha de compra:</strong> {{ticket.purchase_datetime}}</p>
     <p class="total-amount"><strong>Total:</strong> ${{ticket.amount}}</p>
     <p><strong>Comprador:</strong> {{ticket.purchaser}}</p>
-    <div id="message"></div> <!-- Div para mostrar mensajes -->
+    <div id="message"></div>
     <form action="/api/ticket/{{ticket._id}}/mail" method="POST">
     <button type="submit">Recibir el ticket por mail</button>
     </form>
@@ -23,7 +23,7 @@
     <button type="submit">Recibir el ticket por sms</button>
     </form>
 
-    <a href="/" class="back-link">Volver a la tienda</a>
+    <a href="/">Volver a la tienda</a>
   </div>
 
 

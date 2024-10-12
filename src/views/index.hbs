@@ -47,7 +47,7 @@
       encontrados:', buttons); // Verifica si encuentra los botones
       buttons.forEach(button => { button.addEventListener('click', async (event)
       => { const productId = event.target.dataset.productId;
-      console.log("Producto agregado:", productId); // Debes ver el ID del
+      console.log("Producto agregado:", productId);
       producto const response = await fetch(`/api/cart/add/${productId}`, { method:
       'POST', headers: { 'Content-Type': 'application/json', }, }); if
       (response.ok) { alert('Producto agregado al carrito'); } else {

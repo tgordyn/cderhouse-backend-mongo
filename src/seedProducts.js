@@ -1,6 +1,5 @@
-// seedProducts.js
 import mongoose from 'mongoose';
-import Product from './models/products.js'; // Asegúrate de que el path sea correcto
+import Product from './models/products.js';
 
 mongoose.connect('mongodb+srv://dbUser:passwordUser@codercluster.lwivk.mongodb.net/?retryWrites=true&w=majority&appName=CoderCluster', {
   useNewUrlParser: true,
@@ -80,7 +79,7 @@ mongoose.connect('mongodb+srv://dbUser:passwordUser@codercluster.lwivk.mongodb.n
   return Product.insertMany(productosIniciales);
 }).then(() => {
   console.log('Productos cargados exitosamente');
-  mongoose.connection.close(); // Cierra la conexión después de cargar los productos
+  mongoose.connection.close();
 }).catch((err) => {
   console.error('Error cargando productos:', err);
   mongoose.connection.close();

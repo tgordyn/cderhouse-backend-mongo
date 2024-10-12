@@ -25,12 +25,12 @@ const productSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ['available', 'unavailable'], // Puedes ajustar los estados según necesites
+    enum: ['available', 'unavailable'],
   },
   code: {
     type: String,
     required: true,
-    unique: true // Para asegurar que cada producto tenga un código único
+    unique: true
   },
   description: {
     type: String,

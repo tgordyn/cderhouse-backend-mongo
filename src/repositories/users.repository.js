@@ -8,7 +8,7 @@ class UserRepository {
   async createUser(userData) {
     const { password, ...rest } = userData;
     console.log("Contraseña antes de encriptar:", password);
-    const newUser = new User({ ...rest, password }); // Aquí ya no se hace el hash
+    const newUser = new User({ ...rest, password });
     return await newUser.save();
 }
 
@@ -26,11 +26,12 @@ class UserRepository {
     if (!user) return null;
 
 
-    console.log("Contraseña ingresada:", password); // Muestra la contraseña ingresada
-    console.log("Contraseña almacenada:", user.password); // Muestra la contraseña almacenada
+    console.log("Contraseña ingresada:", password);
+    console.log("Contraseña almacenada:", user.password);
     const isValid = bcrypt.compareSync(password.trim(), user.password);
+
     // Verifica si la comparación es verdadera
-    return isValid ? new UserDTO(user) : null; // Retorna un DTO si la contraseña es válida
+    return isValid ? new UserDTO(user) : null;
   }
 
   async updateUser(userId, userData) {
