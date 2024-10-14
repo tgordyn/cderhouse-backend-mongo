@@ -1,5 +1,5 @@
 # Entrega Final curso Backend II - Tomas Gordyn
-Este proyecto corresponde a la **Entrega final** del curso **Programación Backend II: Diseño y Arquitectura Backend**, comisión **70070**. Implementación de Login, Register, autorización, autenticación de usuario, generacion de Ticket, arquitectura DAO, DTO, Repository, implementación de nodemailer y Twilio.
+Este proyecto corresponde a la **Entrega final** del curso **Programación Backend II: Diseño y Arquitectura Backend**, comisión **70070**. Implementación de Login, Register, autorización, autenticación de usuario, socket.io, generacion de Ticket, arquitectura DAO, DTO, Repository, implementación de nodemailer y Twilio.
 
 ## Requisitos previos
 Asegúrate de tener instalados los siguientes programas:
