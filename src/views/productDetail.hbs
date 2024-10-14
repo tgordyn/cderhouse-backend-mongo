@@ -25,7 +25,7 @@
         <p><strong>Precio:</strong> ${{product.price}}</p>
         <p><strong>Categoría:</strong> {{product.category}}</p>
         <p><strong>Descripción:</strong> {{product.description}}</p>
-        <p><strong>Stock:</strong> {{product.stock}} unidades disponibles</p>
+        <p><strong>Stock:</strong> <span id="stock">{{product.stock}}</span> unidades disponibles</p>
         <button class="add-to-cart-btn" data-product-id="{{product._id}}">Agregar al carrito</button>
       </div>
     </div>
@@ -34,45 +34,50 @@
   <footer>
     <a href="/">Volver a la tienda</a>
   </footer>
-
+  <script src="/socket.io/socket.io.js"></script>
   <script>
+  const socket = io();
 
-    const isLoggedIn = {{isLoggedIn}};
+  socket.on("actualizar-carrito", (data) => {
+    const stockElement = document.getElementById('stock');
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const buttons = document.querySelectorAll('.add-to-cart-btn');
-      console.log('Botones encontrados:', buttons);
+    if (data.productId === "{{product._id}}") {
+      stockElement.textContent = data.newStock; // Actualiza el stock en la vista
+    }
+  });
 
-      buttons.forEach(button => {
-        button.addEventListener('click', async (event) => {
-          const productId = event.target.dataset.productId;
-          console.log("Producto agregado:", productId);
+  const isLoggedIn = {{isLoggedIn}};
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('.add-to-cart-btn');
 
-          if (!isLoggedIn) {
-            alert('Debe loguearse para agregar producto al carrito');
-            return;
-          }
+    button.addEventListener('click', async (event) => {
+      const productId = event.target.dataset.productId;
 
-          const response = await fetch(`/api/cart/add/${productId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
+      if (!isLoggedIn) {
+        alert('Debe loguearse para agregar producto al carrito');
+        return;
+      }
 
-          if (response.ok) {
-            alert('Producto agregado al carrito');
-          } else {
-            alert('Error al agregar el producto al carrito.');
-          }
-        });
+      const response = await fetch(`/api/cart/add/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        alert('Producto agregado al carrito');
+
+        // Emitir evento a través de Socket.IO para actualizar el stock
+        socket.emit('producto-agregado', { productId, newStock: responseData.newStock });
+      } else {
+        alert('Error al agregar el producto al carrito.');
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
-
-
-
 </script>

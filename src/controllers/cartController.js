@@ -46,12 +46,17 @@ export const addProductToCart = async (req, res) => {
     product.stock -= 1;
     await product.save();
 
-    res.status(200).json({ message: 'Producto agregado al carrito' });
+    // Emitir evento para actualizar el stock en tiempo real
+    const io = req.app.get('socketio');
+    io.emit('actualizar-carrito', { productId, newStock: product.stock });
+
+    res.status(200).json({ message: 'Producto agregado al carrito', newStock: product.stock });
   } catch (err) {
     console.error('Error al agregar producto al carrito:', err);
     res.status(500).json({ message: 'Error al agregar producto al carrito' });
   }
 };
+
 
 // Eliminar producto del carrito
 export const removeProductFromCart = async (req, res) => {
@@ -99,19 +104,15 @@ export const purchaseCart = async (req, res) => {
 
     for (let item of cart.products) {
       if (item.product.stock >= item.quantity) {
-        item.product.stock -= item.quantity;
-        await item.product.save();
         totalAmount += item.product.price * item.quantity;
 
         productsToPurchase.push({
           product: item.product._id,
           quantity: item.quantity,
         });
+      } else {
+        return res.status(400).json({ message: `No hay suficiente stock para ${item.product.title}.` });
       }
-    }
-
-    if (productsToPurchase.length === 0) {
-      return res.status(400).json({ message: 'No hay productos suficientes en stock.' });
     }
 
     const ticketCode = uuidv4();
@@ -124,7 +125,9 @@ export const purchaseCart = async (req, res) => {
     });
 
     await newTicket.save();
-    cart.products = cart.products.filter(item => !productsToPurchase.find(p => p.product.equals(item.product._id)));
+
+    // Limpiar el carrito después de la compra
+    cart.products = [];
     await cart.save();
 
     res.redirect(`/api/ticket/${newTicket._id}`);
