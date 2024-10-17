@@ -27,12 +27,12 @@ const initializePassport = () => {
       },
       async (jwt_payload, done) => {
         try {
-          console.log('jwt!', jwt_payload)
           const user = await User.findById(jwt_payload.id);
           if (user) {
+            user.role = jwt_payload.role || user.role;
             return done(null, user);
           }
-          return done(null, false); // No se encontró el usuario
+          return done(null, false);
         } catch (error) {
           return done(error, false);
         }

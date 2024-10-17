@@ -19,17 +19,32 @@
   </header>
 
   <main>
-    <div class="product-detail-container">
-      <img src="{{product.image}}" alt="{{product.title}}" class="product-image-detail">
-      <div class="product-info">
-        <p><strong>Precio:</strong> ${{product.price}}</p>
-        <p><strong>Categoría:</strong> {{product.category}}</p>
-        <p><strong>Descripción:</strong> {{product.description}}</p>
-        <p><strong>Stock:</strong> <span id="stock">{{product.stock}}</span> unidades disponibles</p>
+  <div class="product-detail-container">
+    <img src="{{product.image}}" alt="{{product.title}}" class="product-image-detail">
+    <div class="product-info">
+      <p><strong>Precio:</strong> ${{product.price}}</p>
+      <p><strong>Categoría:</strong> {{product.category}}</p>
+      <p><strong>Descripción:</strong> {{product.description}}</p>
+      <p><strong>Stock:</strong> <span id="stock">{{product.stock}}</span> unidades disponibles</p>
+
+      <!-- Deshabilitar botón si no es 'user' -->
+      {{#if (eq userRole 'user')}}
         <button class="add-to-cart-btn" data-product-id="{{product._id}}">Agregar al carrito</button>
-      </div>
+      {{else}}
+        <button class="add-to-cart-btn" data-product-id="{{product._id}}" disabled>Agregar al carrito</button>
+      {{/if}}
+
+      <!-- Formulario para admin -->
+      {{#if (eq userRole 'admin')}}
+        <form id="update-stock-form">
+          <input type="number" id="stockToAdd" name="stockToAdd" placeholder="Cantidad a agregar" required>
+          <button type="submit">Agregar unidades</button>
+        </form>
+      {{/if}}
+
     </div>
-  </main>
+  </div>
+</main>
 
   <footer>
     <a href="/">Volver a la tienda</a>
@@ -74,6 +89,48 @@
         socket.emit('producto-agregado', { productId, newStock: responseData.newStock });
       } else {
         alert('Error al agregar el producto al carrito.');
+      }
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('update-stock-form');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Evita la recarga de la página
+      console.log('Formulario enviado!!!!!!!!!!!!!!!!!!!!!!'); // Log para confirmar el envío del formulario
+
+      const stockToAdd = document.getElementById('stockToAdd').value;
+      productId = "{{product._id}}"
+      console.log('id', productId)
+      if (stockToAdd <= 0) {
+        alert('Debes agregar una cantidad mayor que 0.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/products/update-stock/${productId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ stockToAdd }),
+        });
+
+        const data = await response.json();
+        console.log('data!!!', data)
+        if (response.ok) {
+          alert('Stock actualizado correctamente');
+          console.log('Respuesta del servidor:', data);
+          window.location.reload();
+        } else {
+          console.log("ERROR")
+          alert('Error actualizando el stock: ' + data.message);
+          console.log('Error:', data);
+        }
+      } catch (error) {
+        console.error('Error en la petición:', error);
       }
     });
   });

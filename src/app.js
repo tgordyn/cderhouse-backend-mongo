@@ -8,6 +8,7 @@ import sessionsRouter from './routes/api/sessions.js';
 import viewsRouter from './routes/views.js';
 import cartRouter from './routes/api/cart.js';
 import ticketRouter from './routes/api/ticket.js';
+import productRouter from './routes/api/products.js';
 import methodOverride from 'method-override';
 import passport from "passport";
 import initializePassport from "./config/passport.config.js";
@@ -16,6 +17,7 @@ import config from './config/config.js';
 import dotenv from "dotenv";
 import { Server as SocketIOServer } from "socket.io";
 import http from "http";
+import Handlebars from 'handlebars';
 
 dotenv.config();
 
@@ -25,8 +27,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new SocketIOServer(server);
 
-console.log(app.get('env'))
-
+//console.log(app.get('env'))
+Handlebars.registerHelper('eq', function (a, b) {
+  return a === b;
+});
 // Configuración de Handlebars
 app.engine('hbs', engine({
     extname: '.hbs',
@@ -65,6 +69,7 @@ app.set('socketio', io);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/ticket', ticketRouter);
+app.use('/api/products', productRouter);
 app.use('/', viewsRouter);
 
 // Manejo de errores 404
@@ -74,7 +79,7 @@ app.use((req, res, next) => {
 
 // Configuración de Socket.IO
 io.on('connection', (socket) => {
-  console.log('Nuevo cliente conectado');
+  //console.log('Nuevo cliente conectado');
   socket.on('producto-agregado', (data) => {
     console.log('Producto agregado:', data);
     io.emit('actualizar-carrito', data);

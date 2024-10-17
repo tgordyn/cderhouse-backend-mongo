@@ -44,9 +44,6 @@ class UserRepository {
     });
   }
 
-  generateToken(userId) {
-    return jwt.sign({ id: userId }, SECRET_PASSPORT );;
-  }
 }
 
 export default new UserRepository();

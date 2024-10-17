@@ -37,7 +37,10 @@
               <p>Categoría: {{this.product.category}}</p>
               <p>Precio: ${{this.product.price}}</p>
               <p>Cantidad: {{this.quantity}}</p>
-              <form action="/api/cart/remove/{{this.product._id}}" method="POST">
+              <form
+                action="/api/cart/remove/{{this.product._id}}"
+                method="POST"
+              >
                 <button class="btn2" type="submit">Eliminar del carrito</button>
               </form>
             </div>

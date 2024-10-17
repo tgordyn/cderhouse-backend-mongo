@@ -27,8 +27,9 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
     }
 
-    // Genera el token JWT
-    const token = jwt.sign({ id: userDTO._id }, SECRET_PASSPORT);
+
+    const token = jwt.sign({ id: userDTO._id, role: userDTO.role }, SECRET_PASSPORT);
+    console.log('token!', token)
     res.cookie('jwt', token, { httpOnly: true });
     res.redirect('/api/sessions/current');
   } catch (err) {
@@ -36,7 +37,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// Obtener usuario actual
+
 export const getCurrentUser = async (req, res) => {
   try {
     if (req.user) {
