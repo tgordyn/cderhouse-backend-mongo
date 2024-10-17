@@ -19,10 +19,25 @@ Asegúrate de tener instalados los siguientes programas:
 
 4. **Configuración del archivo `.env`:**
    - Crea un archivo `.env` en la raíz del proyecto con el siguiente formato, reemplazando los valores con los apropiados para tu entorno de desarrollo.
-  Ejemplo de archivo `.env.example` para referencia de variables.
+  Ejemplo de archivo `.env.example` para referencia de variables. Para facilitar test se proveen temporalmente mis credenciales:
+  ```env
+  PORT=8080
+  MONGO_URL=mongodb+srv://dbUser:passwordUser@codercluster.lwivk.mongodb.net/?retryWrites=true&w=majority&appName=CoderCluster
+  ADMIN_NAME=adminCoder
+  ADMIN_PASSWORD=adminCoder
+  JWT_SECRET=coder_jwt
+  SECRET_PASSPORT=secret_passport
+  MAIL=tu-mail@gmail.com
+  MAIL_PASS=xxxx xxxx xxxx xxxx
+  TWILIO_ACCOUNT_SID=tu_twilio_sid
+  TWILIO_AUTH_TOKEN=tu_twilio_auth_token
+  TWILIO_SMS_NUMBER=tu_twilio_numero_telefono
 
 1. **Iniciar la aplicación:**
-   - npm start
+   - Para desarrollo:
+    npm run dev
+   - Para producción:
+    npm start
 
 2. **Poblar base de datos con productos:**
    - cd src
