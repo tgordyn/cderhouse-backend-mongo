@@ -19,7 +19,7 @@ Asegúrate de tener instalados los siguientes programas:
 
 4. **Configuración del archivo `.env`:**
    - Crea un archivo `.env` en la raíz del proyecto con el siguiente formato, reemplazando los valores con los apropiados para tu entorno de desarrollo.
-  Ejemplo de archivo `.env.example` para referencia de variables. Para facilitar test se proveen temporalmente mis credenciales:
+  Ejemplo de archivo `.env.example` para referencia de variables. Para facilitar test se proveen temporalmente mis credenciales (ver file envVariables):
   ```env
   PORT=8080
   MONGO_URL=mongodb+srv://dbUser:passwordUser@codercluster.lwivk.mongodb.net/?retryWrites=true&w=majority&appName=CoderCluster

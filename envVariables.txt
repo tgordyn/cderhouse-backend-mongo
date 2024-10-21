@@ -1,0 +1,12 @@
+PORT=8080
+MONGO_URL=mongodb+srv://dbUser:passwordUser@codercluster.lwivk.mongodb.net/?retryWrites=true&w=majority&appName=CoderCluster
+ADMIN_NAME=adminCoder
+ADMIN_PASSWORD=adminCoder
+JWT_SECRET=coder_jwt
+SECRET_PASSPORT =secret_passport
+MAIL=tomiggi@gmail.com
+MAIL_PASS=jpyw ymsd xxwy vawk
+TWILIO_CODE=4WQE8DWZQEVWQDWX831TPYGS
+TWILIO_ACCOUNT_SID=AC5bb71b49c5c63d3bb04ab402cabf57a8
+TWILIO_AUTH_TOKEN=3408291760722158235eae2acdccd16b
+TWILIO_SMS_NUMBER=+12027336178
